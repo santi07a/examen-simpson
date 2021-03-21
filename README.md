@@ -1,70 +1,25 @@
-# Getting Started with Create React App
+# App personajes de Los Simpsons
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aquí tienes una app React sólo con una maqueta (con Bootstrap ya cargado). El listado de personajes que ves es falso, tendrás que programar la app para que el usuario pueda ir creando personajes desde el formulario y que vayan apareciendo en el listado de abajo. El mensaje "Hay un total de 3 personajes" tiene que reflejar el número real de personajes que hay.
 
-## Available Scripts
+Crea las variables de estado que creas necesarias, teniendo en cuenta que tanto los personajes como la función para añadir un personaje tienen que estar en un Context.
 
-In the project directory, you can run:
+La lista de edades es fija, es la que ves en el HTML del select y puedes dejarla así.
 
-### `npm start`
+## Fase 1: sin imagen
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Tienes que dividir la interfaz en componentes. Además de App, tiene que haber:
+- un componente para el formulario
+- un componente para el total de personajes
+- un componente para el listado de personajes
+- un componente para <ins>cada</ins> personaje
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Cuando el usuario envíe el formulario:
+- Primero se debe comprobar que no exista ya en el listado un personaje con el mismo nombre y apellido. Si existe, no ocurrirá nada.
+- Si no existe, se debe añadir el nuevo personaje a la lista de personajes.
 
-### `npm test`
+## Fase 2: con GIF
+Cada personaje debe tener un GIF asociado. Cuando el usuario envíe el formulario de nuevo personaje, la app se conectará a la API de [Giphy](https://api.giphy.com/) para buscar un GIF aleatorio del personaje. Si la API no devuelve ninguna imagen, el nuevo personaje llevará la imagen genérica (img/nubes.jpg). Si la API devuelve una imagen, el nuevo personaje llevará dicha imagen.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+El endpoint para pedir los datos es `https://api.giphy.com/v1/gifs/random?api_key=TUAPIKEY&tag=NOMBREYAPELLIDOSDELPERSONAJE`. Recuerda que el nombre y apellidos del personaje se lo tienes que enviar codificado con `encodeURI()`.
+En la respuesta de la API verás una propiedad `images`, dentro de ésta una propiedad `original`, y dentro de ésta una propiedad `url`, que es donde está la imagen que debes usar.
